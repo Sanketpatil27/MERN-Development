@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Featching API</title>
+</head>
+<script>
+    // the api return promise that promise also retuns promise 
+    // 2 ways to deal with them:
+
+    // using .then()
+    // function getAnimalData() {
+    //     fetch("https://fakerapi.it/api/v1/persons")
+    //     .then((response) => {
+    //         response.json()
+    //         .then((finalData) => {
+    //             console.log(finalData);
+    //         }) 
+    //     })
+    // }
+
+    // using async await:
+    async function getAnimalData() {
+        const response = await fetch("https://fakerapi.it/api/v1/persons");
+        const finalData = await response.json();
+        console.log(finalData);
+    }
+</script>
+<body>
+    <button onclick="getAnimalData()">getData</button>
+</body>
+</html>

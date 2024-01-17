@@ -1,0 +1,141 @@
+* {
+    margin: 0px;
+    padding: 0px;
+
+    font-family: 'Borel', cursive;
+}
+
+.main_box {
+    background: url(https://raw.githubusercontent.com/apna-college/Delta/main/CSS/Mini%20Project/photo.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;              /* to give full height of view Port */
+}
+
+.btn_one i{
+    color: white;
+    font-size: 30px;
+    position: absolute;             /* position with respect to document */
+    left: 16px;
+    cursor: pointer;
+}
+
+.sidebar_menu {
+    position: fixed;        /* according to whole screen */
+    /* moving menubar outside of screen */
+    left: -300px;           
+
+    height: 100vh;   
+    width: 300px; 
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
+
+    /* effect when clicking on button */
+    transition: all 0.3s linear;
+}
+
+.sidebar_menu .logo {
+    position: absolute;
+    width: 100%;
+    line-height: 50px;
+    box-shadow: 0 2px 4px rgba(255, 255, 255, 0.5);
+    height: 60px;
+}
+
+.sidebar_menu .logo a {
+    position: absolute;
+    left: 30px;
+    color: white;
+
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.sidebar_menu .btn_two i{
+    color: grey;
+    font-size: 25px;
+    line-height: 40px;
+    position: absolute;
+    left: 270px;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.sidebar_menu .menu {
+    position: absolute;
+    width: 100%;
+    top: 80px;
+}
+
+/* giving margin & padding for menu items */
+.sidebar_menu .menu li {
+    margin-top: 6px; 
+    padding: 10px 20px;
+}
+
+/* changing menu options text color */
+.sidebar_menu .menu i,a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+/* giving padding in between list logos and names */
+.sidebar_menu .menu i {
+    padding-right: 4px;
+}
+
+/* controling social media logos */
+.sidebar_menu .social_media {
+    position: absolute;             /* relative to parent(side menu here) */
+    left: 16px;
+    bottom: 10px;
+}
+
+.sidebar_menu .social_media i {
+    color: white;
+    opacity: 0.5;
+    padding: 0 5px;
+}
+
+#check {
+    display: none;
+    /* visibility: hidden;  this will keep the space for checkbox in screen*/
+}
+
+/* giving shadow when hovering on list items in menu */
+.sidebar_menu .menu li:hover {
+    box-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
+}
+
+/* hovering hamberger menu */
+.btn_one i:hover {
+    font-size: 40px;
+    cursor: pointer;
+}
+
+.btn_two i:hover {
+    font-size: 30px;
+}
+
+.sidebar_menu .social_media i:hover {
+    opacity: 1;
+    transform: scale(1.23);
+}
+
+/* ~ sign in relation with sibling */
+/* moving side menu bar from minus value to position to visiable in screen */
+#check:checked ~ .sidebar_menu {
+    left: 0px;
+}
+
+/* hiding menu buttong when we click it */
+#check:checked ~ .btn_one i {
+    opacity: 0;
+}
+
+/* gettign X sign when we click menu button */
+#check:checked ~ .sidebar_menu .btn_two i {
+    opacity: 1;
+}

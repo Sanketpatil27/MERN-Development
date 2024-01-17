@@ -1,0 +1,131 @@
+/* universal Selector */
+* {
+    font-family: 'Arial Narrow';
+    /* background-color: aqua; */
+}
+
+/* !important doesn't chagne it further */
+h3 {
+    color: #b92b27 !important;
+}
+
+/* element selector */
+h3 {
+    color: rgba(234, 130, 196, 0.882);
+}
+
+h1 {
+    color: #b92b27;
+}
+
+/* Id selector */
+#login,
+#signup {
+    background-color: rgb(38, 148, 160);
+}
+
+/* class selector */
+.upvote {
+    background-color: greenyellow;
+}
+
+/* descendant(child) selector */
+.post a {
+    color: rgb(38, 148, 160);
+    background-color: yellow;
+}
+
+nav ul li a {
+    color: olive;
+}
+
+/* Adjacent Sibling Combinator 
+which means h3 tag which comes immedieatly after p tag (not child!)*/
+p+h3 {
+    text-decoration: underline;
+}
+
+.upvote+button {
+    background-color: rgb(247, 185, 185);
+    color: darkred;
+}
+
+/* child combinator (direct descendants only) 
+only works on child element which comes direct 1 level after parent*/
+div > input {
+    background-color: rgb(255, 211, 100);
+}
+
+/* Attribute Selector: selects elem based on presence or value of a given attribute */
+/* ex: input[attr="value"] {
+            property: value;
+        } 
+*/
+input[type="text"] {
+    color: green;
+}
+
+input[type="password"] {
+    color: red;
+}
+
+/* also work when only presence */
+input[type] {
+    background-color: ghostwhite;
+}
+
+/* practice */
+#myId p {
+    color: seagreen
+}
+
+/* OR but has less priority than id*/
+div[id="myId"] p {
+    color: goldenrod;
+}
+
+/* psuedo selectors */
+button:hover {
+    background-color: black;
+    color: white;
+}
+
+h3:hover {
+    text-decoration: overline;
+}
+
+/* active works when ele is in active state */
+button:active {
+    background-color: hotpink;
+    color: black;
+}
+
+p:active {
+    font-weight: bold;
+    color: skyblue;
+}
+
+input[type="radio"]:checked + label{
+    color: red;
+    font-weight: bold;
+}
+
+/* no of div box in 1 section */
+div:nth-of-type(2) {
+    background-color: blanchedalmond;
+}
+
+/* Psuedo Element */
+/* changing specific part of specific element, like changing first line of paragraph or first letter or last letter.. */
+h1::first-letter {
+    color: rgb(86, 171, 255);
+}
+
+#para::first-line {
+    color: purple;
+}
+
+/* Represents the portion of a document that has been highlighted by the user. */
+p::selection {
+    background-color: lime;
+}

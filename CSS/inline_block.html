@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>inline Block</title>
+
+    <style>
+        div {
+            height: 200px;
+            width: 200px;
+            background-color: aquamarine;
+            border: 2px solid black;
+            margin: 5px;
+            display: inline-block;
+        }
+
+        #second {
+            /* Hiding an element can be done by setting the display property to none. The element will be hidden, and the page will be displayed as if the element is not there: */
+            display: none;
+
+            /* also hides an element. However, the element will still take up the same space as before. The element will be hidden, but still affect the layout: */
+            /* visibility: hidden; */
+        }
+    </style>
+
+</head>
+<body>
+    <div></div>
+    <div id="second"></div>
+    <div id="third"></div>
+</body>
+</html>

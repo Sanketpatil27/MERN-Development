@@ -1,0 +1,40 @@
+div {
+    /* increment height for content area  */
+    height: 300px;
+    width: 400px;
+    background-color: pink;
+
+    /* border-width: 5px;
+    border-style: solid;
+    border-color: black; */
+
+    /* shorthand property for above properties */
+    border: 5px solid black;
+
+    /* border-left: 5px dashed magenta;
+    border-top: 5px solid lawngreen; */
+
+    /* (first radius values) / top-left-and-bottom-right | top-right-and-bottom-left */
+    border-radius: 50% 20% / 10% 40%;
+
+    /* space between border & content */
+    padding: 20px;
+
+    margin-bottom: 20px;
+    margin: 12px 23px;
+}
+
+h1 {
+    border: 2px dashed blueviolet;
+    border-radius: 12px;
+}
+
+button {
+    border-radius: 7px;
+    
+    /* padding-left: 23px;
+    padding-right: 23px; */
+
+    /* top-and-bottom  & left-and-rihgt */
+    padding: 23px 34px;
+}

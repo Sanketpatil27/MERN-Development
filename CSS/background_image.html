@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Image</title>
+
+    <style>
+        * {
+            background-color: black;
+        }
+
+        div {
+            color: white;
+            width: 400px;
+            height: 200px;
+            background-color: mediumaquamarine;
+            margin: 20px auto;
+            border: 2px solid white;
+
+            /* contain- crop x, scale x repeat
+               cover- crop scaleX 
+               auto- stretch 
+            */
+            background-image: url("https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_640.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+
+            /* while transitioning from normal style to scaling */
+            transition: 82ms;
+        }
+
+        div:hover {
+            transform: scale(1.4);
+        }
+    </style>
+</head>
+
+<body>
+    <div>My Box</div>
+</body>
+
+</html>

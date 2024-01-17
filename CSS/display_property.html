@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Properties</title>
+
+    <style>
+        h1 {
+            background-color: lime;
+            display: inline;
+        }
+
+        span {
+            background-color: blueviolet;
+            /* display: block; */
+
+            border: 2px solid black;
+
+            /* for inline elements padding may overlap on top & bottom side & margin only set̥ on Left &right side 
+            height & width also not change */
+            padding: 23px;
+            margin: 23px;
+
+            height: 200px;
+            width: 200px;
+        }
+        
+        div {
+            border: 2px solid black;
+            
+            /* for block elements padding & margin set on all side, height & weight also can be changed*/
+            padding: 23px;
+            margin: 23px;
+            
+            height: 200px;
+            width: 200px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- <h1>Hello1</h1>
+    <h1>Hello2</h1> -->
+    <!-- <span>span1</span>
+    <span>span2</span> -->
+    <hr>
+    <h1>Heading</h1>
+    <div></div>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum iusto modi harum repellendus accusantium laborum ex
+        a fugit saepe vel recusandae quia adipisci dolores praesentium iste qui,<span>INLINE</span> doloremque facilis?
+        Quos fugit explicabo id debitis nisi repudiandae excepturi dolor. Modi mollitia quasi esse, eaque ipsam dolor
+        facere? Aperiam nisi officiis vitae repellat quis laboriosam quidem repudiandae blanditiis.</p>
+</body>
+
+</html>

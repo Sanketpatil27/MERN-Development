@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Position</title>
+
+    <style>
+        div {
+            height: 100px;
+            width: 100px;
+            background-color: greenyellow;
+            text-align: center;
+            border: 2px solid black;
+            margin: 20px;
+            display: inline-block;
+        }
+
+        #static {
+            background-color: pink;
+            position: static;
+            top: 100px;
+            left: 100px;
+        }
+
+        /* change top & left from its original position not from on page position */
+        #relative {
+            background-color: pink;
+            position: relative;
+            top: 100px;
+            left: 100px;
+            /* left offset */
+        }
+
+        /* doesn't create any space for absolute position elements where they should actually present */
+        /* if parent (section here) has no position other than static then it change according to page top & left */
+        #absolute {
+            background-color: pink;
+            position: absolute;
+            top: 100px;
+            left: 100px;
+            /* left offset */
+        }
+
+        /* remains fixed on page while scrolling */
+        #fixed {
+            background-color: pink;
+            position: fixed;
+            top: 100px;
+            left: 100px;
+            /* left offset */
+        }
+
+        #sticky {
+            background-color: pink;
+            position: sticky;
+            top: 0;
+        }
+    </style>
+
+</head>
+
+<body>
+    <section>
+        <h2>Static Demo</h2>
+        <div></div>
+        <div id="static"></div>
+    </section>
+
+    <section>
+        <h2>Relative Demo</h2>
+        <div></div>
+        <div id="relative"></div>
+        <div></div>
+    </section>
+
+    <section>
+        <h2>Absolute Demo</h2>
+        <div></div>
+        <div id="absolute"></div>
+        <div></div>
+    </section>
+
+    <section>
+        <h2>Fixed Demo</h2>
+        <div></div>
+        <div id="fixed"> fixed </div>
+        <div></div>
+    </section>
+
+    <h3>Sticky Demo</h3>
+    <div id="sticky"> Sticky </div>
+
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos hic repudiandae impedit adipisci, beatae est
+        totam sed, eveniet odio fugiat blanditiis voluptas consequatur. Iusto ratione nemo doloribus officia quod
+        dignissimos velit, repudiandae temporibus ipsam. Explicabo est doloremque quidem laudantium corrupti dolores
+        perspiciatis rerum. Dicta possimus laboriosam sit! Doloribus ea quaerat voluptate vel laborum quidem, voluptates
+        impedit ut eaque odit, placeat aliquam fugiat hic distinctio eveniet amet. Pariatur obcaecati voluptate
+        excepturi laboriosam tempore dicta nam blanditiis impedit deleniti veritatis repellendus consequuntur
+        accusantium exercitationem, laudantium reprehenderit rem enim ullam quod assumenda inventore aut fuga nesciunt
+        sit. Ipsum sit atque cum nemo dicta sequi, vel cupiditate error optio! Minus quibusdam maiores dignissimos
+        aperiam! Ipsum, sed iusto. Minus libero iure quidem nulla vitae quod fugit quam amet consectetur eius, dolorum
+        aspernatur sequi vel illo perferendis voluptates non sint placeat dicta nam. Reprehenderit exercitationem et
+        dolor. Facere, magni? Tempora odit, repellendus officiis, quia facere iusto, ducimus repellat iste ipsam autem
+        magni. Esse nulla voluptate, quisquam culpa recusandae obcaecati ullam blanditiis soluta eveniet. Nostrum modi
+        corrupti tenetur, maiores earum sequi porro. Suscipit esse beatae quod amet eos laboriosam porro reprehenderit
+        similique veniam, provident maxime dignissimos perferendis explicabo eius repudiandae consequatur? Explicabo
+        maxime quod nemo quisquam neque atque natus perspiciatis. Voluptatibus id neque repellendus in est blanditiis
+        facere totam aut aperiam provident saepe similique, harum autem consequuntur aliquam accusantium.</p>
+
+</body>
+
+</html>

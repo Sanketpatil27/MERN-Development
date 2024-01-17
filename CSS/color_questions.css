@@ -1,0 +1,30 @@
+h1 {
+    color: cornflowerblue;
+    background-color: thistle;
+}
+
+p {
+    background-color: cadetblue;
+    color: blueviolet;
+}
+
+button {
+    color: darkslategrey;
+    background: yellowgreen;
+}
+
+/* for practice question */
+/* adding div so that upper code doesn't affect downword code */
+div h2 {
+    color: orange;
+}
+
+div button {
+    background-color: blue;
+    color: white;
+}
+
+div p {
+    color: white;
+    background-color: black;
+}

@@ -1,0 +1,51 @@
+html{
+    font-family: "Big Caslon", "Book Antiqua", "Palatino Linotype", Georgia, serif;
+}
+h1 {
+    /* text-align work according to parent   */
+    text-align: center;
+    text-align: right;
+    border: solid;
+    width: 75%;
+
+    text-decoration: underline;
+    text-decoration-color: blueviolet;
+    text-decoration: blueviolet underline;
+
+    letter-spacing: 16.3px;
+
+    font-size: 60px;
+    font-family: sans-serif;
+}
+
+h2 {
+    font-weight: normal;
+    font-weight: 700;       /* range from 100 - 900 */
+
+    text-decoration: overline;
+    text-decoration-color:aquamarine ;
+    text-decoration: red overline;
+}
+
+h3 {
+    /* right == start left == end */
+    /* text-align: end; */
+    text-decoration: line-through; /*or*/
+    text-decoration: palevioletred double line-through;
+}
+
+p {
+    /* text-align: end; */
+    font-weight: bold;
+    font-weight: 400;
+
+    text-decoration: pink wavy underline;
+
+    /* line height */
+    line-height: 1.6;
+    line-height: normal;
+}
+
+a {
+    text-decoration: none;
+}

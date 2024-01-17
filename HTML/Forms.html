@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forms</title>
+
+    <style>
+        input {
+            accent-color: pink;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="/server">
+        <!-- 2 types to attack label to input  -->
+        <!-- 1. using input in label tag -->
+        <!-- 2. using for in label tag -->
+        <label for="uname">Enter Name:</label>
+        <input type="text" id="uname" name="user" placeholder="hello">
+        <br>
+        <label>Enter Password: <input type="password" name="password" placeholder="Enter Password"></label>
+        <br>
+        <label for="num">Enter number: </label>
+        <input type="number" id="num" placeholder="Number" />
+        <br>
+        Time: <input type="time"> <br>
+        Month: <input type="month"> <br>
+        Color: <input type="color"> <br>
+        <input type="file">
+        <input type="range">
+
+        <label for="tarea">Please Give Your Feedback: </label>
+        <textarea name="tarea" id="tarea" cols="30" rows="2">hello</textarea>
+
+        <br>
+        <!-- buttons -->
+        <div>
+            <!-- all works same -->
+            <input type="submit">
+            <button>submit</button>
+            <button type="submit">submit</button>
+        </div>
+        <button type="button">Button</button>
+        <input type="button" value="button">
+    </form>
+    <br>
+    <hr>
+
+    <!-- form redirecting to YoutUbe with giving name to textbox-->
+    <form action="https://www.youtube.com/results?">
+        Search In YouTube: <input type="text" name="search_query">
+        <button>Search</button>
+    </form>
+
+    <br>
+    <!-- searching in Google -->
+    <form action="https://www.google.com/search?">
+        Search In Google: <input type="text" name="q">
+        <button>Google</button>
+    </form>
+    <hr>
+    <br>
+
+    <!-- checkBox, Radio -->
+    <form action="/server">
+        <div>
+            Choose you subjects: 
+            <input type="checkbox" checked id="dsa" name="sub" value="dsa">
+            <label for="dsa">DSA</label>
+            <input type="checkbox" checked id="OOP" name="sub" value="OOP">
+            <label for="OOP">OOP</label>
+            <input type="checkbox" checked id="AI" name="sub" value="AI">
+            <label for="AI">AI</label><br>
+        </div>
+
+        <!-- radio buttons grouoped by name attribute, value used to pass which value has been checked (url: name=value)-->
+        <div>
+            <input type="radio" checked name="fruit" id="apple" value="apple">
+            <label for="apple">Apple</label>
+
+            <input type="radio" name="fruit" id="mango" value="mango">
+            <label for="mango">mango</label>
+
+            <input type="radio" name="fruit" id="banana" value="banana">
+            <label for="banana">banana</label>
+        </div>
+        <br>
+        <button>submit</button>
+    </form>
+    <hr> <br>
+
+    <!-- DropDowns -->
+    <form action="/server">
+        <div>
+            Choose Your Profession: 
+            <select name="prof" id="prof">
+                <option value="">Select Option</option>
+                <option value="stud">student</option>
+                <option value="dev" selected>Developer</option>
+            </select> <br>
+            <button>submit</button>
+        </div>
+    </form>
+    <hr><br>
+
+    <!-- range, step for increasing amount, value for default selected value -->
+    <form action="">
+        <label for="vol">Select Volume</label>
+        <input type="range" min="1" max="301" step="10" value="30" id="val" name="volume">
+        <button>submit</button>
+    </form>
+</body>
+
+</html>

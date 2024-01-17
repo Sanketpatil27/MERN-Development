@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relative Units</title>
+
+    <style>
+        /* em: in relation with parent or self */
+        /* rem: in relation its root element */
+        h1 {
+            border: 2px solid black;
+            width: 50%;
+        }
+        
+        #outer {
+            height: 300px;
+            width: 300px;
+            background-color: pink;
+            margin: 50px;
+
+        }
+
+        #inner {
+            height: 100px;
+            width: 100px;
+            background-color: cornflowerblue;
+            margin-left: 10%;
+        }
+        
+        /* for em: relative to text relative properties like font-size, width */
+        #outer {
+            height: 300px;
+            width: 300px;
+            background-color: pink;
+            font-size: 20px;
+        }
+
+        #inner {
+            /* 2em: 2times of parent size */
+            font-size: 2em;   
+            padding: 1em;       /* in relation of his font size */
+            height: 100px;
+            width: 100px;
+            background-color: cornflowerblue; 
+        }
+
+        button {
+            font-size: 100px;
+            border-radius: 15px;
+            border: 5px solid greenyellow;
+            padding-left: 1em;      /*with respect to font-size on left & right padding*/
+            padding-right: 1em;
+        }
+    </style>
+</head>
+<body>
+    <h1> Hello </h1>
+
+    <div id="outer">
+        This is outer
+        <div id="inner"> This is inner </div>
+    </div> 
+
+    
+    <Button>Click Me</Button>
+</body>
+</html>

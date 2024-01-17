@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animation</title>
+
+    <style>
+        .box {
+            height: 100px;
+            width: 100px;
+            background-color: pink;
+
+            /* animation-name: widthAnimate;
+            animation-duration: 3s;
+            animation-timing-function: ease-out;
+            animation-delay: 0;
+            animation-iteration-count: infinite;
+            animation-direction: alternate; */
+
+            /* shorthand property for above */
+            /* animation: widthAnimate 3s ease-in 0s infinite alternate; */
+
+            animation: colAnimate 3s ease-in 0s infinite alternate;
+        }
+
+        @keyframes fontAnimation {
+            form {
+                font-size: 20px;
+            }
+
+            to {
+                font-size: 40px;
+            }
+        }
+
+        @keyframes widthAnimate {
+            from {
+                width: 10px;
+                background-color: cadetblue;
+            }
+
+            to {
+                width: 400px;
+                background-color: rgb(1, 255, 221);
+                border-radius: 16px;
+            }
+        }
+
+        @keyframes colorAnimate {
+            from {
+                background-color: greenyellow;
+            }
+
+            to {
+                background-color: blueviolet;
+            }
+        }
+
+        /* animation in percent: */
+        @keyframes colAnimate {
+            0% {
+                background-color: rgb(79, 255, 10);
+            }
+
+            50% {
+                background-color: rgb(1, 255, 221);
+            }
+
+            80% {
+                background-color: black;
+            }
+
+            100% {
+                background-color: blueviolet;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Animations</h1>
+    <div class="box">This is box</div>
+</body>
+
+</html>

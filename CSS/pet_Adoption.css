@@ -1,0 +1,54 @@
+#pets {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.card {
+    border: 3px solid black;
+    border-radius: 26px;
+    width: 400px;
+    padding: 10px;
+    margin: 10px;
+}
+
+img {
+    width: 100%;
+    border-radius: 26px;
+}
+
+h2 {
+    color: #d56f3e;
+}
+
+span {
+    color: #249d42;
+    animation-name: colAnim;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    animation-duration: 4s;
+}
+
+@keyframes colAnim {
+    0% {
+        color: rgb(81, 244, 173);
+    }
+
+    50% {
+        color: greenyellow;
+    }
+
+    100% {
+        color: rgb(95, 135, 210);
+    }
+}
+
+h4 {
+    text-align: right;
+    color: #3c787e;
+}
+
+@media (max-width: 375px) {
+    #pets {
+        flex-wrap: wrap;
+    }
+}

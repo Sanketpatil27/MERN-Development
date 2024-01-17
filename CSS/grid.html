@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid</title>
+
+    <style>
+        h1 {
+            text-align: center;
+        }
+        .container {
+            width: 600px;
+            height: 300px;
+            background-color: rgb(156, 70, 70);
+
+            /* to make this at middle */
+            margin: 10px auto;
+
+            display: grid;
+            
+
+            /* making no.of tracks(space between lines) */
+            /* grid-template-rows: 50px 50px 50px 50px 50px; */
+            /* grid-template-columns: 200px 200px 200px; */
+            /* grid-template-columns: auto auto auto auto; */
+
+            /* fr- 100 fraction of available width/space */
+            /* equally divide space for no given in argument */
+            grid-template-rows: repeat(4, 1fr);
+            /* grid-template-rows: 1fr 1fr 1fr;    same as above */
+            grid-template-columns: repeat(3, 1fr);
+
+            row-gap: 10px;
+            column-gap: 30px;
+            /* shorthand property for above */
+            /* grid-gap: 10px 30px; */
+            grid-gap: 10px;
+
+            /* justify makes it horizontally */
+            justify-items: start;
+            justify-items: center;
+
+            /* align-item for vertical */
+            align-items: center;
+        }
+
+        .item {
+            width: 100px;
+            height: 50px;
+            background-color: greenyellow;
+            border: 2px solid black;
+            text-align: center;
+        }
+
+        .one {
+            /* grid-column: for deciding columns starting ending */
+            /* grid-column-start: 1; */
+            /* grid-column-end: 4; */
+            /* shorthand for above: start_col/end_col */
+            /* grid-column: 1/4; */
+            /* start_col/span number: how many boxed we want to span after starting */
+            /* grid-column: 1/ span 3; */
+
+            /* individual justifying */
+            /* justify-self: end; */
+
+            /* for both justify self & align self */
+            place-self: start;
+        }
+
+        .two {
+            /* grid-row-start: 1;
+            grid-row-end: 3; */
+            /* grid-row: 1/span 2; */
+        }
+    </style>
+</head>
+<body>
+    <h1>Grid PlayGround</h1>
+    <div class="container">
+        <div class="item one">1</div>
+        <div class="item two">2</div>
+        <div class="item">3</div>
+        <div class="item">4</div>
+        <div class="item">5</div>
+    </div>
+</body>
+</html>

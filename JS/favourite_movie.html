@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Guessing Game</title>
+</head>
+
+<body>
+    <script>
+        document.write("Guess my favourite movie")
+        document.write("<br>Press 'Q' for quiting")
+        
+        let favMovie = '3 idiots'
+        let guess;
+
+        while (guess != 'Q' && guess != favMovie) {
+            guess = prompt("Guess My favourite Movie?");
+        }
+
+        alert("Yeh! You Guessed it correct!!");
+
+    </script>
+</body>
+
+</html>
