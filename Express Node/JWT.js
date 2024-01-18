@@ -10,7 +10,7 @@ const value = {
 // jwt
 const token = jwt.sign(value, 'secret');
 // this token has generated using this secret, and hence this 
-// token can only beverified using this secret
+// token can only be varified using this secret
 
 console.log(token);
 // this is my chequebook(token):
