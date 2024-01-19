@@ -29,6 +29,15 @@ app.get('/addUser', (req, res) => {
     res.json(user);
 })
 
+// Reading Data
+app.get('/readUsers', async function(req, res)  {
+    const allUsers = await User.find();
+    const findUser = await User.findOne({name: "ant-man"});
+    console.log(findUser);
+
+    res.send(allUsers); 
+})
+
 // deleting User
 app.get('/deleteUser', async function(req, res) {
     const deleted = await User.findOneAndDelete({name: "\"ant-man\" email=\"ant@gmail.com\""});
@@ -38,7 +47,7 @@ app.get('/deleteUser', async function(req, res) {
         res.send("User Not Found!!!");
         return;
     }
-    
+
     res.send(deleted);
 })
 

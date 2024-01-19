@@ -6,8 +6,8 @@
 some methods to work on model:
 note: all methods related to model are `async`
 
-model.find():-                    give all user in array
 model.findOne({name: 'helo'}): -  give specific user with matching object
+model.find():-                    give all user in array
 
 Model.findOneAndDelete({name: 'thor'}):-  delete user & return its data, if not found then return null
 -->
