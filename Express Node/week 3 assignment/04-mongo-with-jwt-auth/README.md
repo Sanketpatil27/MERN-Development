@@ -1,4 +1,4 @@
-## Create a course selling website
+<!-- ## Create a course selling website
 
 ### Description
 
@@ -49,4 +49,4 @@ You need to use mongodb to store all the data persistently.
 - GET /users/purchasedCourses
   Description: Lists all the courses purchased by the user.
   Input: Headers: { 'Authorization': 'Bearer <your-token>' }
-  Output: { purchasedCourses: [ { id: 1, title: 'course title', description: 'course description', price: 100, imageLink: 'https://linktoimage.com', published: true }, ... ] }
+  Output: { purchasedCourses: [ { id: 1, title: 'course title', description: 'course description', price: 100, imageLink: 'https://linktoimage.com', published: true }, ... ] } -->
