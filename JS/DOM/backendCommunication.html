@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debouncing</title>
+</head>
+<script>
+    // based on index.html
+
+    // its purpose is to populateDiv() if it doesn't get called till 100milliseconds
+    // it will save the multiple calls to the backend
+    let timeoutID;
+    function debouncePopulateDiv() {
+        // delay the call to populateDiv until I've not been called for 100ms
+        // and I've been called atleast once 
+
+        // now its running good but before 100ms if again debouncePopulateDiv get called
+        // then we have to delete previous running clock
+        // answer is- using clearTimeout();
+        // setTimeout returns the value
+        
+        // The global clearTimeout() method cancels a timeout previously 
+        // established by calling setTimeout(). this fun doesn't return any error! 
+        clearTimeout(timeoutID);    // if any previous clock running delete it
+        timeoutID = setTimeout(function () {
+                            populateDiv();  
+                        }, 1000);
+
+    }
+
+    // if we do onchange="this function" then thre are so many unneccessory call get fired 
+    // so to reduce that  we use debouncing!
+    async function populateDiv() {
+        let a = document.getElementById('principal').value;
+        let b = document.getElementById('rate').value;
+        let c = document.getElementById('time').value;
+        let element = document.getElementById('finalAns');
+
+        const response = await fetch(`https://sum-server.100xdevs.com/interest?principal=${a}&rate=${b}&time=${c}`);
+        const ans = await response.text();
+        console.log(ans);
+        element.innerHTML = ans;
+    }
+</script>
+
+<body>
+    <label for="">principal: <input id="principal" type="text" onchange="debouncePopulateDiv()" /> </label> <br>
+    <label for="">rate: <input id="rate" type="text" onchange="debouncePopulateDiv()" /> </label> <br>
+    <label for="">time: <input id="time" type="text" onchange="debouncePopulateDiv()" /> </label> <br>
+    
+    <!-- try using onchange -->
+    <!-- <button onclick="populateDiv()">get Interest</button> -->
+    <div id="finalAns">hi there</div>
+</body>
+
+</html>

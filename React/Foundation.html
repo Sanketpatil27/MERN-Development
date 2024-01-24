@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>React Foundation</title>
+</head>
+
+<script>
+    let id = 0;     // id to set on each child
+
+    function markAsDone(todoId) {
+        const element = document.getElementById(todoId);
+        // element has 3 childs, index 2 is of button
+        element.children[2].innerHTML = "Done!";    
+    }
+
+    function createChild(title, description, id) {
+        // instead of this we can create new element
+        // container.innerHTML += title + "<br><button onclick='addTodo()'>Add todo</button>" + description;
+
+        // as per assignment 4.2 we need to add this:
+        // <div>
+        //      <div> title </div>
+        //      <div> description </div>
+        //      <button> </button>
+        // </div>
+        const titleDiv = document.createElement("div"); // creates <div></div>
+        titleDiv.innerHTML = title;
+        const descDiv = document.createElement("div"); // creates <div></div>
+        descDiv.innerHTML = description;
+        const btn = document.createElement("button");
+        btn.innerHTML = "mark as done";
+        btn.setAttribute("onclick", `markAsDone(${id})`);       // logic for marking todo done!
+
+        const parentDiv = document.createElement("div");
+        parentDiv.setAttribute("id", id);   // set id to each parent div 
+        parentDiv.append(titleDiv, descDiv, btn); // used only append to add multiple items
+        return parentDiv;
+    }
+
+    // function addTodo() {
+    //     const title = document.getElementById("title").value;
+    //     const description = document.getElementById("description").value;
+    //     const container = document.getElementById("container");
+
+    //     container.appendChild(createChild(title, description, id++));   // increment id for each child
+    // }  
+    
+    // now we don't have button to add todos, we do it with api call to backend
+    // try to create React like state (State is the object that holds some information that may change over lifetime)
+    // State will always be an array of objects
+    //  Every element of state would  have a title, description and id
+    function updateDomAccToState(state) {
+        const parent = document.getElementById("container");
+        parent.innerHTML = "";      // make it empty for each call
+
+        for(let i = 0; i < state.length; i++) {
+            const child = createChild(state[i].title, state[i].description, state[i].id);
+            parent.appendChild(child);
+        }
+    }
+
+    // every 5 seconds there will be a call to updateDom with random todos
+    window.setInterv̥al(async () => {
+        const res = await fetch("https://sum-server.100xdevs.com/todos");   // this call returns random todos
+        const json = await res.json();
+        updateDomAccToState(json.todos);   // json is object of array that contains todos objects
+    }, 5000);   
+
+</script>
+
+<body>
+    <div>
+        <input type="text" id="title" placeholder="title"> <br><br>
+        <input type="text" id="description" placeholder="description"> <br><br>
+        <!-- <button onclick="addTodo()">Add todo</button> -->
+    </div>
+    <div id="container">
+
+    </div>
+</body>
+</html>
