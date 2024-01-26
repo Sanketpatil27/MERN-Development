@@ -58,7 +58,7 @@
           const ind = oldTodoState.findIndex((todo) => todo.id === newTodos.id);
           if(ind == -1)
             added.push(newTodo);
-          // check if updated!
+          // else check if updated!
           else {
             if(oldTodoState[ind].title != newTodo.title || 
                oldTodoState[ind].description != newTodo.title)

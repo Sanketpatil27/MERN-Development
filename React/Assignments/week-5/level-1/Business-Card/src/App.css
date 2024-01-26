@@ -1,0 +1,13 @@
+html {
+    background-color: rgb(235 255 254 / 84%);
+}
+
+#card {
+    margin-top: 100px;
+    border: 1px solid black;
+    border-radius: 9px;
+    width: 18rem;
+    padding: 15px;
+    background-color: rgb(237, 237, 237);
+    box-shadow: 8px 8px 5px rgb(67, 117, 133);
+}
