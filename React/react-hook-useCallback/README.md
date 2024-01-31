@@ -1,5 +1,5 @@
 ## useCallback
-- if we ever want to memoize a function we use useCallback
+- if we ever want to memoize a function we use useCallback, it returns a function
 
 - we can also do this task with useMemo as well!
 - useCallback is not about minimizing the amount of code that is run 

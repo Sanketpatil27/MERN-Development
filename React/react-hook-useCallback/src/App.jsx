@@ -56,5 +56,4 @@ const CryptoGainsCalcy = memo(function({cryptoReturns}) {
     </div>
 })
 
-// 8: min
 export default App
