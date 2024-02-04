@@ -24,7 +24,7 @@ function App() {
             </div> */}
 
             <BrowserRouter>
-                <Appbar /> 
+                <Appbar />  { /* this part remains same accross all routers */}
                 <Routes>
                     <Route path="/" element={<Suspense fallback={"loading..."}> <Landing/> </Suspense>}> </Route>
                     <Route path="/dashboard" element={<Suspense fallback={"loading..."}> <Dashboard/> </Suspense>}> </Route>
