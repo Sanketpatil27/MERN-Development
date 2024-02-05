@@ -1,48 +1,41 @@
-import { networkAtom, totalNotificationSelector, jobsAtom, messagingAtom, notificationsAtom } from './atoms'
-import { RecoilRoot, useRecoilValue, useRecoilState } from 'recoil'
-import { useMemo } from "react";
+
 import './App.css'
+import { RecoilRoot, useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
+import { notifications, totalNotificationSelector } from './atoms'
+import { useEffect } from 'react'
+import axios from 'axios'
 
 function App() {
-
-  return (
-    <RecoilRoot>
-        <MainApp />
-    </RecoilRoot>
-  )
+  return <RecoilRoot>
+    <MainApp />
+  </RecoilRoot>
 }
 
 function MainApp() {
-  const networkAtomCount = useRecoilValue(networkAtom);
-  const jobsAtomCount = useRecoilValue(jobsAtom);
-  const [messaginAtomCount, setMessageAtomCount] = useRecoilState(messagingAtom);
-  const notificationAtomCount = useRecoilValue(notificationsAtom);
-  
-  // for showing total notifications in 'me' button we can do this, better way is using selectors
-  // const finalValue = useMemo(()=> {
-  //   return networkAtomCount+jobsAtomCount+messaginAtomCount+notificationAtomCount;
-  //   }, [networkAtomCount, jobsAtomCount, messaginAtomCount, notificationAtomCount]
-  // );
+  const [networkCount, setNetworkCount] = useRecoilState(notifications)
+  const totalNotificationCount = useRecoilValue(totalNotificationSelector);
 
-  // final value using selector
-  const finalValue = useRecoilValue(totalNotificationSelector);
-
+  // rather  this  we fetch data in atom directly
+  // useEffect(() => {
+  //   // fetch
+  //   axios.get("https://sum-server.100xdevs.com/notifications")
+  //     .then(res => {
+  //       setNetworkCount(res.data)
+  //     })
+  // }, [])
+ 
   return (
-      <RecoilRoot>  
-        <div>
-            <button>Home</button>
-            
-            <button>My Network <sup> ({networkAtomCount >= 100 ? "99+" : networkAtomCount}) </sup> </button>
-            <button>Jobs <sup> ({jobsAtomCount}) </sup> </button>
-            <button>Messaging <sup> ({messaginAtomCount >= 100 ? "99+" : messaginAtomCount}) </sup></button>
-            <button>Notifications <sup> ({notificationAtomCount}) </sup></button>
+    <>
+      <button>Home</button>
+      
+      <button>My network ({networkCount.networks >= 100 ? "99+" : networkCount.networks})</button>
+      <button>Jobs {networkCount.jobs}</button>
+      <button>Messaging ({networkCount.messaging})</button>
+      <button>Notifications ({networkCount.notifications})</button>
 
-            <button onClick={() => {
-              setMessageAtomCount(c => c+1);
-            }}>Me <sup>({finalValue})</sup></button>
-        </div>
-      </RecoilRoot>
-  ) 
+      <button>Me ({totalNotificationCount})</button>
+    </>
+  )
 }
 
 export default App

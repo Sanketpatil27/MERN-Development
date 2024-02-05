@@ -1,35 +1,41 @@
-import { atom, selector } from "recoil"
+import { atom, selector } from "recoil";
+import axios from 'axios';
 
-export const networkAtom = atom({
+
+export const notifications = atom({
     key: "networkAtom",
-    default: 104
-})
 
-export const jobsAtom = atom({
-    key: "jobsAtom",
-    default: 0
-})
+    // default: {
+    //     network: 4, 
+    //     jobs: 6, 
+    //     messaging: 3, 
+    //     notifications: 3
+    // }
+    
+    // instead of defining this initially like this, we should create fetch request in atom here using function,
+    // default: async() => {
+    //     const res = await axios.get("​https://sum-server.100xdevs.com/notifications");
+    //     return res.data;
+    // }
 
-export const messagingAtom = atom({
-    key: "messagingAtom",
-    default: 0
-})
+    // but default can't be a asynchronous defined, but selector can so we do it in selector
+    default: selector({
+        key: "networkAtomSelector",
+        get: async () => {
+            // await new Promise(r => setTimeout(r, 5000));    // for adding artificial delay, sleeps for 5 seconds, screen complete blanks
+            const res = await axios.get("https://sum-server.100xdevs.com/notifications");
+            return res.data;
+        }
+    })
+});
 
-export const notificationsAtom = atom({
-    key: "notificationsAtom",
-    default: 12
-})
-
-// usign selector for adding up all values and show in `me` button
-// selector work same like useMemo() it knows value depends on which values, work like dependancy array
 export const totalNotificationSelector = selector({
     key: "totalNotificationSelector",
     get: ({get}) => {
-        const networkAtomCount = get(networkAtom);
-        const jobsAtomCount = get(jobsAtom);
-        const messagingAtomCount = get(messagingAtom);
-        const notificationsAtomCount = get(notificationsAtom);
-
-        return networkAtomCount+jobsAtomCount+messagingAtomCount+notificationsAtomCount;
+        const allNotifications = get(notifications);
+        return allNotifications.network + 
+        allNotifications.jobs + 
+        allNotifications.notifications + 
+        allNotifications.messaging
     }
 })
