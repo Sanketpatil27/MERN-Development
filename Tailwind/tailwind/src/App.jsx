@@ -30,12 +30,12 @@ function App() {
         <div className='bg-yellow-500'> hi </div>
       </div>
       
-      {/* responsiveness */}
-      <div className='bg-red-500 md:bg-blue-500'>
-       hii there
+      {/* responsiveness, above md it will goes to 3 cols */}
+      <div className='grid grid-col-1 md:grid-cols-3'>
+        <div className='bg-green-500'> responsiveness </div>
+        <div className='bg-blue-500'> hi there </div>
+        <div className='bg-orange-500'> hello </div>
       </div>
-
-      {/* 42 mins */}
       
     </>
   )
