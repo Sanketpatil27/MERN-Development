@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dummy records generator</title>
+</head>
+
+<body>
+    <p id="container"></p>
+    <button onclick="generate()">Generate 10 records to database</button>
+    <script>
+        async function generate() {
+            const names = ['rohit', 'shikhar', 'virat'];
+            const salary = [354323, 234232324, 23423424];
+            const city = ['New York', "Mumbai", 'Amsterdam'];
+            const isManager = [true, false, false];
+
+            const response = fetch('http://localhost:3000/generator', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: names[Math.floor(Math.random() * names.length)],
+                    salary: salary[Math.floor(Math.random() * salary.length)],
+                    city: city[Math.floor(Math.random() * city.length)],
+                    isManager: isManager[Math.floor(Math.random() * isManager.length)]
+                }),
+            })
+
+
+            const elem = document.getElementById('container');
+            elem.innerHTML = "Records generated Successfully!, Check Database...";
+        }
+    </script>
+</body>
+
+</html>
