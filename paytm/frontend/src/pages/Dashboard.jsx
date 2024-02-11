@@ -8,7 +8,8 @@ import axios from "axios";
 export function Dashboard() {
     const [amount, setAmount] = useState();
     useEffect(() => {
-        axios.get("http://localhost:3000/api/v1/account/balance", {
+        // axios.get("http://localhost:3000/api/v1/account/balance", {
+        axios.get("https://reactapp-paytm-wallet.onrender.com/api/v1/account/balance", {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem("token")
             }
