@@ -46,8 +46,6 @@ userRouter.post('/signup', async (req, res) => {
         firstName: userBody.firstName,
         lastName: userBody.lastName,
         password: userBody.password  
-        // OR:
-        // userBody
     });
 
     // giving bank balance to user as signup gift
@@ -118,7 +116,7 @@ userRouter.put('/', authMiddleware, async (req, res) => {
 });
 
 userRouter.get("/bulk", async (req, res) => {
-    const filter = req.query.filter;
+    const filter = req.query.filter || "";
     // const users = User.find({firstName: name});
     const users = await User.find({
         $or: [{

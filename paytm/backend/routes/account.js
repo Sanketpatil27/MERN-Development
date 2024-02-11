@@ -64,12 +64,13 @@ accountRouter.get('/balance', authMiddleware, async (req, res) => {
 // good solution using transactions in databases
 accountRouter.post('/transfer', authMiddleware, async (req, res) => {
     const session = await mongoose.startSession();
-    
+
     session.startTransaction();
     const { amount, to } = req.body;
 
     // fetch account with transaction
     const fromAccount = await Account.findOne({userId: req.userId}).session(session);
+    console.log(`SenderId: ${fromAccount.userId}`);
 
     if(!fromAccount)
         return res.status(411).json({msg: "Your Account doesn't exist!"});
@@ -81,6 +82,7 @@ accountRouter.post('/transfer', authMiddleware, async (req, res) => {
     }
 
     const toAccount = await Account.findOne({userId: to}).session(session);
+    console.log(`ReceiverId: ${toAccount.userId}`);
 
     if(!toAccount) {
         await session.abortTransaction();
