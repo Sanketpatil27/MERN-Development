@@ -1,0 +1,35 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+// below User model same as this sql query:
+// CREATE TABLE users {
+//   id SERIAL PRIMARY KEY,
+//   email ...
+// }
+
+model User {
+  id Int  @id @default(autoincrement())
+  email String @unique 
+  firstName String
+  lastName String?    // ? - optional
+  password String
+}
+
+// TODO model
+model TODO {
+  id Int @id @default(autoincrement())
+  title String
+  done Boolean @default(false)
+  description String?
+  userId Int
+}

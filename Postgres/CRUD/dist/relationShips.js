@@ -37,7 +37,7 @@ function createRelation() {
         }
     });
 }
-createRelation(); // calling it again give error: already exist
+// createRelation();        // calling it again give error: already exist
 // inserting data in address of user
 function insertAddress() {
     return __awaiter(this, void 0, void 0, function* () {
