@@ -1,0 +1,25 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  // url      = "prisma://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5IjoiNDA5MTE5OGYtYTk3OC00MmM3LWJhNTgtMjZhODY1YWMyODlhIiwidGVuYW50X2lkIjoiM2IyOWM4OGM1M2NiOTgwYTQyM2MwM2UzMDM0YTI2YWEzYmVmN2Y4ZGI2MmFjM2M3MjFiOWJiMzE0OWM5YjY1NiIsImludGVybmFsX3NlY3JldCI6IjkxY2ZhODU3LTYxMzgtNDBhMS05NjViLWRiYzhmYjBlNDQ2MiJ9.KAvHQaEUB9knN2T54tgvFWvPW6smLDLis_zrwxujKDw"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int @id @default(autoincrement())
+  username  String
+  email     String @unique
+  password  String
+}
+
+model blog {
+  id          Int @id @default(autoincrement())
+  title       String
+  description String
+}

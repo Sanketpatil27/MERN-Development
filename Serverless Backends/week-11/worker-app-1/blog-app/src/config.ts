@@ -1,0 +1,1 @@
+export const SECRET = "Its_secret";
