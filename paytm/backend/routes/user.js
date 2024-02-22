@@ -77,7 +77,7 @@ userRouter.post('/signin', async (req, res) => {
         username: userBody.username,
         password: userBody.password
     });
-     
+
     if(user)
     {
         const token = jwt.sign({userId: user._id}, JWT_SECRET);
