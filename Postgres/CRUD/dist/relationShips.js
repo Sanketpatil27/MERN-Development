@@ -54,5 +54,4 @@ function insertAddress() {
         }
     });
 }
-console.log('fuck you');
 insertAddress();
