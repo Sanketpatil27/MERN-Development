@@ -25,7 +25,7 @@ async function getUserAddress(userId: string) {
     try {
         await client.connect();
         const query = `
-            SELECT u.id, u.username, u.email, a.city, a.country
+            SELECT u.id, u.username, u.email, a.city, a.country, a.street, a.pincode
             FROM users u
             JOIN addresses a ON u.id = a.user_id
             WHERE u.id = $1
@@ -33,7 +33,7 @@ async function getUserAddress(userId: string) {
         const result = await client.query(query, [userId]);
 
         if(result.rows.length > 0) 
-            console.log('User & address found: ', result.rows[0]);
+            console.log('User & address found: ', result.rows);
         else 
             console.log('No user or address found with given id!');
         
@@ -45,4 +45,4 @@ async function getUserAddress(userId: string) {
     }
 }
 
-getUserAddress('8');
+getUserAddress('10');

@@ -45,7 +45,7 @@ function insertAddress() {
             yield client.connect();
             const res = yield client.query(`
             INSERT INTO addresses (user_id, city, country, street, pincode)
-            VALUES (8, 'Amsterdam', 'USA', 'Nepolian Hill', '10111');
+            VALUES (10, 'Amsterdam', 'USA', 'Nepolian Hill', '10111');
         `);
             console.log(res);
         }

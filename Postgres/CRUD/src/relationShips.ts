@@ -37,7 +37,7 @@ async function insertAddress() {
         await client.connect();
         const res = await client.query(`
             INSERT INTO addresses (user_id, city, country, street, pincode)
-            VALUES (8, 'Amsterdam', 'USA', 'Nepolian Hill', '10111');
+            VALUES (10, 'Amsterdam', 'USA', 'Nepolian Hill', '10111');
         `);
 
         console.log(res);
