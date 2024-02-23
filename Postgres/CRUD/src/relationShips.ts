@@ -34,9 +34,10 @@ async function createRelation() {
 // inserting data in address of user
 async function insertAddress() {
     try {
+        await client.connect();
         const res = await client.query(`
             INSERT INTO addresses (user_id, city, country, street, pincode)
-            VALUES (8, 'New York', 'USA', '123 Broadway St', '10001');
+            VALUES (8, 'Amsterdam', 'USA', 'Nepolian Hill', '10111');
         `);
 
         console.log(res);

@@ -42,9 +42,10 @@ function createRelation() {
 function insertAddress() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
+            yield client.connect();
             const res = yield client.query(`
             INSERT INTO addresses (user_id, city, country, street, pincode)
-            VALUES (8, 'New York', 'USA', '123 Broadway St', '10001');
+            VALUES (8, 'Amsterdam', 'USA', 'Nepolian Hill', '10111');
         `);
             console.log(res);
         }
@@ -53,4 +54,5 @@ function insertAddress() {
         }
     });
 }
+console.log('fuck you');
 insertAddress();
