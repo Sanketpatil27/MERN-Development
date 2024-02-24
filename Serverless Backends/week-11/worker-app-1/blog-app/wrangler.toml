@@ -4,6 +4,10 @@ compatibility_date = "2023-12-01"
 # [vars]
 # MY_VARIABLE = "production_value"
 
+# connection pooling accelerate URL: 
+[vars]
+DATABASE_URL = "prisma://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5IjoiNDA5MTE5OGYtYTk3OC00MmM3LWJhNTgtMjZhODY1YWMyODlhIiwidGVuYW50X2lkIjoiM2IyOWM4OGM1M2NiOTgwYTQyM2MwM2UzMDM0YTI2YWEzYmVmN2Y4ZGI2MmFjM2M3MjFiOWJiMzE0OWM5YjY1NiIsImludGVybmFsX3NlY3JldCI6IjkxY2ZhODU3LTYxMzgtNDBhMS05NjViLWRiYzhmYjBlNDQ2MiJ9.KAvHQaEUB9knN2T54tgvFWvPW6smLDLis_zrwxujKDw"
+
 # [[kv_namespaces]]
 # binding = "MY_KV_NAMESPACE"
 # id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"

@@ -2,11 +2,12 @@ import { Hono } from 'hono'
 // import { router } from "./routes/users";                 // used to import routes but giving error below while routeing
 import { PrismaClient } from '@prisma/client/edge'
 import { withAccelerate } from "@prisma/extension-accelerate";
-import { decode, sign, verify } from 'hono/jwt'
+import { sign } from 'hono/jwt'
 import { cors } from 'hono/cors';
 import { z } from "zod"
 import { SECRET } from './config';
 import { authMiddleware } from './middlewares';
+import { env } from 'hono/adapter';
 
 const app = new Hono();
 
@@ -15,7 +16,7 @@ app.use('/api/*', cors());
 
 
 const prisma = new PrismaClient({
-    datasourceUrl:
+    datasourceUrl: 
         "prisma://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5IjoiNzg4YzY3YmItODU5OC00MTMwLTk1MDgtNWYzNmI0OTUzN2VkIiwidGVuYW50X2lkIjoiM2IyOWM4OGM1M2NiOTgwYTQyM2MwM2UzMDM0YTI2YWEzYmVmN2Y4ZGI2MmFjM2M3MjFiOWJiMzE0OWM5YjY1NiIsImludGVybmFsX3NlY3JldCI6IjkxY2ZhODU3LTYxMzgtNDBhMS05NjViLWRiYzhmYjBlNDQ2MiJ9.cP0K_tWHw63MGb3GusK5Uv1303XJITsx6n4c3yQsVo0"
 }).$extends(withAccelerate());
 
@@ -31,7 +32,7 @@ const singinSchema = z.object({
 })
 
 
-// // user routes:
+// user routes:
 app.post('/users/signup', async (c) => {
 
     const body = await c.req.json();
@@ -101,8 +102,8 @@ app.post('/posts', authMiddleware, async (c) => {
     const res = await prisma.blog.create({
         data: {
             title: body.title,
-            description: body.description
-            // have to add it with associated user
+            description: body.description,
+            userId: body.userId,
         }
     });
 
@@ -123,6 +124,7 @@ app.put('/posts/:id', authMiddleware, async (c) => {
     const body = await c.req.json();
     const id = parseInt(c.req.param('id'));
 
+    // have to add strictness- only owner can update & delete their blogs
     const res = await prisma.blog.update({
         where: { id }, 
         data: {
@@ -143,6 +145,6 @@ app.delete('/posts/:id', authMiddleware, async (c) => {
 
     console.log(res);
     return c.json({msg: "Blog deleted successfully"});
-})
+});
 
 export default app
