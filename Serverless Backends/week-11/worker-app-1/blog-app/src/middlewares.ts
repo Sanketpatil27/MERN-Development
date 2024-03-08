@@ -15,7 +15,7 @@ export async function authMiddleware(c: any, next: any) {
         console.log(decoded);
         
         if(decoded) {
-            // c.req = decoded;           // store it for next uses
+            // c.req.userId = decoded;           // store it for next uses (but now decoded contain mail we want userId)
             await next();
         }
         else 
