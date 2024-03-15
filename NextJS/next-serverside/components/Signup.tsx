@@ -1,5 +1,6 @@
 "use client"
 
+import signup from "@/app/actions/user";
 import axios from "axios";
 import { useState } from "react"
 
@@ -21,10 +22,13 @@ export function Signup() {
                 <br />
 
                 <button onClick={() => {
-                    axios.post("http://localhost:3000/api/user", {
-                        email,
-                        password
-                    })
+                    // axios.post("http://localhost:3000/api/user", {
+                    //     email,
+                    //     password
+                    // })
+
+                    // using server actions
+                    signup(email, password);
                 }} className="p-2 m-2 border w-full">Sign up</button> 
             </div>
         </div>

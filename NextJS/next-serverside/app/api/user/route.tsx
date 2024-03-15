@@ -14,6 +14,9 @@ import client from "@/db"
 //     })
 // }
 
+
+// ****** instead this we will using server actions ******
+
 export async function POST(req: NextRequest) {
     // getting body, headers & query params 
     const body = await req.json();          // don't need express.json() middleware for post request here
@@ -23,7 +26,6 @@ export async function POST(req: NextRequest) {
     
     // hit database with email password
     try {
-
         await client.user.create({
             data: {
                 email: body.email,
@@ -37,7 +39,7 @@ export async function POST(req: NextRequest) {
             status: 411
         })
     }
-    
+
     return NextResponse.json({
         body
     })
