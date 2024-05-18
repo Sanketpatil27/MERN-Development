@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todist</title>
+
+    <style>
+        .todo-grid {
+            display: grid;
+            grid-template-columns: 200px 150px 100px;
+            gap: 15px 15px;
+            /* align-items: center; */
+        }
+
+        input {
+            font-size: 15px;
+            padding: 6px;
+            border-radius: 6px;
+            margin-right: 8px;
+        }
+
+        button {
+            font-size: 15px;
+            padding: 15px 25px 15px 25px;
+            border-radius: 6px;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .red {
+            background-color: red;
+        }
+
+        .green {
+            background-color: rgba(93, 202, 93, 0.741);
+        }
+    </style>
+</head>
+<body>
+    <p>Todo List</p>
+
+    <div class="todo-grid">
+        <input placeholder="Todo name" id="adding" onkeydown="changeHandler(event)">
+        <input type="date" id="dueDate">
+        <button onclick="addTodo();" class="green">Add</button>
+    </div>
+    <br>
+    <div class="container todo-grid"> </div>
+
+    <script>
+        const todoList = [];
+
+        function renderList() {
+            document.querySelector('.container').innerHTML = "";   // empty document each time when this function called for rendering again
+
+            // for(let i = 0; i < todoList.length; i++) {
+            //     document.querySelector(".container").innerHTML += `
+            //                 <div> ${todoList[i].name}  </div>
+            //                 <div> ${todoList[i].dueDate}  </div>
+            //                 <button class="red" onclick="deleteItem(${i})">Delete</button>
+            //             `;
+            // }
+
+            // same thing using forEach loop
+            todoList.forEach((todo, i) => {
+                document.querySelector(".container").innerHTML += `
+                            <div> ${todo.name}  </div>
+                            <div> ${todo.dueDate}  </div>
+                            <button class="red" onclick="deleteItem(${i})">Delete</button>
+                        `;
+            });
+        }
+
+        function deleteItem(i) {
+            todoList.splice(i, 1);      // delete that index item from list
+            renderList();
+        }
+
+        function addTodo() {
+            const value = document.querySelector('#adding').value;
+            const dueDate = document.querySelector("#dueDate").value;
+            document.querySelector('#adding').value = "";
+            todoList.push({name: value, dueDate});
+            renderList();
+        }
+
+        function changeHandler(event) {
+            if(event.key === "Enter") {
+                const value = document.querySelector('#adding').value;
+                const dueDate = document.querySelector("#dueDate").value;
+                document.querySelector('#adding').value = "";
+                todoList.push({name: value, dueDate});
+                renderList();
+            }
+        }
+    </script>
+</body>
+</html>
