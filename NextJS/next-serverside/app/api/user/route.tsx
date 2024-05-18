@@ -6,7 +6,7 @@ import client from "@/db"
 // this is used in user/page.tsx
 
 // export async function GET(req: NextRequest) {
-    // const user = await client.user.findFirst();
+//     const user = await client.user.findFirst();
 
 //     return NextResponse.json({
 //         email: user?.email,

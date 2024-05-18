@@ -27,7 +27,7 @@ let rgb = ['red', 'green', 'blue'];
 let pbs = ['purple', 'blue', 'seaBlue'];
 
 let newCombo = rgb.concat(pbs);
-// let newCombo = rgb.concat(pbs, rgb);  // can concat as many as want
+// let newCombo = rgb.concat(pbs, rgb);  // can concat as manyas want
 console.log("concatenate: ", newCombo);
 
 // reverse the original array
@@ -76,11 +76,6 @@ function logThing(str)
 
 // for every elem in nums call logThing function (callbacks)
 nums.forEach(logThing);
-let filterCopy = [1, -3, 5, -6, 4].filter((val) => {
-   return val >= 0;     // copy only positive values
-})
-console.log("filterCopy: ", filterCopy);
-
 
 let ar = [];
 ar.push({category: 'food', price: 23});
