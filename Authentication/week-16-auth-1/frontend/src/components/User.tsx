@@ -15,7 +15,7 @@ export const User = () => {
     }, []);
 
     return <div>
-        You're id is {userData?.userId}
+        You're id is {userData?.userId}         {/* it will still work its type error */}
         <br /><br />
         <button onClick={() => {
             axios.post(`${BACKEND_URL}/logout`, {}, {
