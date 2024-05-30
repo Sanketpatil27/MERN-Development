@@ -16,6 +16,11 @@ io.on('connection', (socket) => {
         // now give that message to all connected sockets(clients)
         io.emit('message', message);
     })
+
+    // when client disconnect
+    socket.on('disconnect', () => {
+        console.log('you are disconnected');
+    })
 });
 
 
