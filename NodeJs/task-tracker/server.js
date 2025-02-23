@@ -28,8 +28,9 @@ const askQuestion = (question) => {
 // mark enter 'mark-in-progress' OR 'mark-done'
 
 const main = async () => {
-    
+    let date = new Date();
     let keep = true;
+
     while(keep) {
 
         let query = await askQuestion("\nPerform any operation: add, update, mark-in-progress, list, list-done, list-todo, list-in-progress or exit: \n");
@@ -38,15 +39,17 @@ const main = async () => {
         switch (operation) {
             case 'add': 
                 let task = await askQuestion("Enter the task: \n");
-                tasks.push({task, 'id': tasks.length+1})
+                tasks.push({task, 'id': tasks.length+1, createdAt: date})
                 break;
 
             case 'update': 
                 var taskId = parseInt(query.split(" ")[1]);
                 let newTask = query.split(" ").slice(2).join(" ");
                 let taskIndex = tasks.findIndex((t) => t.id === taskId)
-                if(taskIndex !== -1) 
+                if(taskIndex !== -1) {
                     tasks[taskIndex].task = newTask;
+                    tasks[taskIndex].updatedAt = date;
+                }
 
                 break;
 
@@ -56,6 +59,7 @@ const main = async () => {
                 let parts = mark.split(" ")[0].split("-");     // get the last status, ex: done from mark-as-done OR progress from 'mark-in-progress'
                 let status = parts.slice(1).join(" ");
                 tasks[taskId-1].status = status;    // -1 for user giving in 1-based indexing but our array work in 0-based
+                tasks[taskId-1].updatedAt = date;
                 break;
 
             case 'list': 
