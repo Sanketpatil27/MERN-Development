@@ -6,6 +6,7 @@ if(!fs.existsSync(DATA_FILE))
     fs.writeFileSync('./data.json', "[{}]", (err)=>{});
 
 let tasks = JSON.parse(fs.readFileSync(DATA_FILE, 'utf-8'));
+// console.log(tasks);
 
 console.log("\n\tWelcome to the task manager!\n")
 
@@ -30,7 +31,7 @@ const main = async () => {
     
     let keep = true;
     while(keep) {
-        console.log(tasks);
+
         let query = await askQuestion("\nPerform any operation: add, update, mark-in-progress, list, list-done, list-todo, list-in-progress or exit: \n");
         let operation = query.split(" ")[0];    // extract the operation(add, update)
 
@@ -51,16 +52,30 @@ const main = async () => {
 
             case 'mark':
                 let mark =  await askQuestion("Enter status: ")
-                var taskId = mark.split(" ")[1];   // get the index from 'mark-as-done 1'
+                var taskId = parseInt(mark.split(" ")[1]);   // get the index from 'mark-as-done 1'
                 let parts = mark.split(" ")[0].split("-");     // get the last status, ex: done from mark-as-done OR progress from 'mark-in-progress'
                 let status = parts.slice(1).join(" ");
-                tasks[taskId].status = status;
+                tasks[taskId-1].status = status;    // -1 for user giving in 1-based indexing but our array work in 0-based
                 break;
 
+            case 'list': 
+                tasks.map((task) => console.log(task.id + " " + task.task))
+                break;
+
+            case 'list-done':
+                doneList = tasks.filter(task => task.status == 'done')
+                console.log(doneList)
+                break;
+
+            case 'list-in-progress':
+                progressList = tasks.filter(task => task.status == 'in progress')
+                progressList.map(task => console.log(task.id + " " + task.task))
+                break;
 
             case 'exit':
                 keep = false;
                 break;
+
             default:
                 break;
         }

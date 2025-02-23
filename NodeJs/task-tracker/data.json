@@ -1,11 +1,12 @@
 [
   {
     "task": "solve the bug",
-    "id": 1
+    "id": 1,
+    "status": "done"
   },
   {
     "task": "go to gym",
     "id": 2,
-    "status": "in procgress"
+    "status": "in progress"
   }
 ]
