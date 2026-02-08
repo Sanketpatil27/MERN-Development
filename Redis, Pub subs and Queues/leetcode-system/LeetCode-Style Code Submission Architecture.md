@@ -1,10 +1,7 @@
-# LeetCode-Style Code Submission Architecture (Mini System Design)
+# LeetCode-Style Code Submission Architecture
 
-This document explains a **simplified LeetCode-style backend architecture** built using **Redis, queues, workers, and pub/sub**. It is meant to serve as a **reference guide** alongside the code in this repository.
 
----
-
-## 1. Problem Statement
+## 1. Problem Being Solved
 
 When users submit code on platforms like LeetCode, the system must:
 
@@ -15,83 +12,100 @@ When users submit code on platforms like LeetCode, the system must:
 
 Running code directly inside the request-response cycle is **not feasible**.
 
----
+An online judge system must handle **large volumes of concurrent code submissions** while ensuring:
 
-## 2. High-Level Architecture Overview
+* Non-blocking APIs
+* Safe execution of untrusted code
+* Horizontal scalability
+* Fault tolerance
 
-**Flow:**
-
-```
-Browser
-   ↓
-Primary Backend Server (API)
-   ↓
-Redis Queue
-   ↓
-Worker Processes
-   ↓
-Result Store (DB / Redis)
-   ↓
-Client Polling / Pub-Sub Notification
-```
+Executing user code synchronously inside the API server is unsafe and unscalable. The solution is an **asynchronous, queue-based architecture**.
 
 ---
 
-## 3. Components Explained
+## 2. High-Level Architecture
+
+```
+┌──────────┐
+│ Browser  │
+│ (Submit) │
+└────┬─────┘
+     │ HTTP
+     ▼
+┌────────────────────┐
+│ Primary API Server │
+│ (Auth + Validate) │
+└────┬───────────────┘
+     │ Push Job
+     ▼
+┌────────────────────┐
+│   Redis Queue      │
+│ (Job Buffer)       │
+└────┬───────────────┘
+     │ Pop Job
+     ▼
+┌────────────────────┐
+│ Worker Pool        │
+│ (Code Execution)   │
+└────┬───────────────┘
+     │ Store Result
+     ▼
+┌────────────────────┐
+│ DB / Redis Store   │
+└────┬───────────────┘
+     │ Poll / Events
+     ▼
+┌──────────┐
+│ Browser  │
+│ (Result) │
+└──────────┘
+```
+
+---
+
+## 3. Component Responsibilities
 
 ### 3.1 Browser (Client)
 
-* User writes code and clicks **Submit**
-* Sends the following payload to backend:
+* Sends code, language, and problem metadata
+* Receives immediate acknowledgment
+* Fetches execution result asynchronously
+
+---
+
+### 3.2 Primary Backend Server (API Layer)
+
+**Responsibilities**
+
+* Authentication & authorization
+* Input validation
+* Submission ID generation
+* Job creation and enqueueing
+
+**Key Design Choice**
+
+* API server **never executes user code**
+* Ensures low latency and high availability
+
+**Example Response**
 
 ```json
-{
-  "userId": "123",
-  "problemId": 42,
-  "language": "cpp",
-  "code": "..."
-}
+{ "status": "SUBMITTED", "submissionId": "abc123" }
 ```
 
 ---
 
-### 3.2 Primary Backend Server (API Server)
+### 3.3 Redis Queue (Asynchronous Job Buffer)
 
-**Responsibilities:**
+Redis is used as a **durable in-memory queue** between producers and consumers.
 
-* Authenticate user
-* Validate request
-* Generate a `submissionId`
-* Push job into Redis queue
-* Respond immediately to client
+**Why a Queue?**
 
-**Important:**
+* Absorbs traffic spikes
+* Decouples request handling from execution
+* Enables independent scaling of workers
 
-* The backend **does NOT execute code**
-* Keeps request-response cycle fast
-
-**Response Example:**
-
-```json
-{
-  "status": "SUBMITTED",
-  "submissionId": "abc123"
-}
-```
-
----
-
-### 3.3 Redis Queue (Job Buffer)
-
-Redis acts as a **job broker** between API servers and workers.
-
-**Why Redis Queue?**
-
-* Extremely fast (in-memory)
-* Handles traffic spikes
-* Decouples producers (API) and consumers (workers)
-
-**Job Structure Example:**
+**Job Payload**
 
 ```json
 {
@@ -104,120 +118,95 @@ Redis acts as a **job broker** between API servers and workers.
 
 ---
 
-### 3.4 Worker Processes
+### 3.4 Worker Pool (Execution Layer)
 
-Workers are **independent background services**.
+Workers are **stateless background services** responsible for code execution.
 
-**Worker Flow:**
+**Worker Lifecycle**
 
-1. Fetch job from Redis queue
-2. Create isolated execution environment (Docker / sandbox)
-3. Run code against test cases
-4. Apply time and memory limits
-5. Generate verdict (AC / WA / TLE / MLE / RE)
-6. Store result in DB or Redis
+```
+while (true):
+  job = pop(redis_queue)
+  run_in_sandbox(job.code)
+  apply_limits(time, memory)
+  evaluate_testcases()
+  store_result()
+```
 
-**Key Properties:**
+**Execution Guarantees**
 
-* Horizontally scalable
-* Fault tolerant
-* Can crash without affecting API servers
+* Isolated environment (Docker / sandbox)
+* Resource limits enforced
+* Failures do not affect API servers
 
 ---
 
-### 3.5 Result Storage & Retrieval
+### 3.5 Result Retrieval & Notification
 
-Results are stored in:
-
-* Database (persistent)
-* Redis (fast access)
-
-**Client Retrieval Methods:**
-
-#### Polling (Simple)
+**Option 1: Polling (Simple & Reliable)**
 
 ```
 GET /submission-status/:submissionId
 ```
 
-#### Pub/Sub / WebSockets (Advanced)
+**Option 2: Pub/Sub / WebSockets (Real-time)**
 
-* Worker publishes status updates
-* Client receives real-time notifications
-
----
-
-## 4. Queue vs Pub/Sub
-
-| Feature             | Queue         | Pub/Sub                |
-| ------------------- | ------------- | ---------------------- |
-| Consumers           | One worker    | Multiple subscribers   |
-| Message Persistence | Yes           | No                     |
-| Use Case            | Job execution | Notifications / events |
-
-**Usage in this system:**
-
-* Queue → Code execution
-* Pub/Sub → Submission status updates
+```
+Worker ──publish──▶ Redis Pub/Sub
+                      │
+                      ▼
+                WebSocket Server
+                      │
+                      ▼
+                   Browser
+```
 
 ---
 
-## 5. Why This Architecture Works
+## 4. Queue vs Pub/Sub (Clear Separation)
 
-### Scalability
+| Aspect      | Queue          | Pub/Sub              |
+| ----------- | -------------- | -------------------- |
+| Delivery    | One consumer   | Multiple subscribers |
+| Persistence | Yes            | No                   |
+| Purpose     | Task execution | Event notification   |
 
-* Add more workers to handle higher load
+**In this system**
 
-### Fault Tolerance
-
-* If a worker crashes, jobs remain in queue
-
-### Security
-
-* User code never runs on main server
-
-### Performance
-
-* API server responds instantly
+* Queue → Execute submissions
+* Pub/Sub → Notify status changes
 
 ---
 
-## 6. Real-World Extensions
+## 5. Production Characteristics
 
-Possible improvements:
-
-* Priority queues (paid vs free users)
-* Multiple queues per difficulty
-* Retry mechanism for failed jobs
-* Worker auto-scaling
-* Rate limiting
-* Language-specific execution containers
+* **Scalable**: Add workers without changing API layer
+* **Fault-tolerant**: Jobs survive worker crashes
+* **Secure**: No user code on API server
+* **Responsive**: Immediate submit acknowledgment
 
 ---
 
-## 7. Interview Value
+## 6. Real-World Enhancements
 
-This system demonstrates:
-
-* Distributed system design
-* Asynchronous processing
-* Queue-based architecture
-* Production-level backend thinking
-
-Explaining this architecture clearly in interviews strongly reflects **backend engineering maturity**.
-
----
-
-## 8. Summary
-
-This mini system simulates how platforms like **LeetCode** process code submissions using:
-
-* Redis queues
-* Worker pools
-* Asynchronous execution
-* Event-driven notifications
+* Priority queues (premium users)
+* Separate queues per difficulty or language
+* Retry & dead-letter queues
+* Auto-scaling workers
+* Rate limiting submissions
 
 
 ---
 
-**End of Document**
+## 7. Summary
+
+This architecture mirrors real-world online judges by combining:
+
+* Asynchronous queues
+* Stateless worker pools
+* Safe execution boundaries
+* Event-driven updates
+
+Designed for **scale, safety, and performance**.
+
+---
